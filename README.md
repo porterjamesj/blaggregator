@@ -27,11 +27,12 @@ Check out [CONTRIBUTE.md](CONTRIBUTE.md) for ideas for what to build.
 
 `python manage.py dbshell`
 
-Create your database: 
+Create your database:
 
 `CREATE DATABASE blaggregator_dev;`
 
-The semicolon is critical. Then go back to bash and populate the database from the app's models. IMPORTANT: when you are creating your admin account, *don't* use the same email address as your Hacker School account or you won't be able to create a user account for yourself. Do username+root@example.com or something.
+The semicolon is critical. Then go back to bash and populate the database from the app's models.
+IMPORTANT: when you are creating your admin account, *don't* use the same email address as your Hacker School account or you won't be able to create a user account for yourself. Do username+root@example.com or something.
 
 `python manage.py syncdb`
 
@@ -43,7 +44,10 @@ Is the server running locally and accepting
 connections on Unix domain socket "/var/pgsql_socket/.s.PGSQL.5432"?
 ```
 
-Then open `settings.py` and under `HOST:` add `/tmp`. 
+Then open `settings.py` and under `HOST:` add `/tmp`.
+
+You'll also have to do an initial [south](http://south.aeracode.org/) migration; `./manage.py schemamigration blaggerator_dev --initial && ./manage.py migrate blaggerator`
+should do the trick.
 
 - Turn on debugging in your environment:
 
@@ -58,7 +62,7 @@ You can administer your app through the [handy-dandy admin interface](http://loc
 
 ###Encountered errors on Ubuntu 12.10:
 
-- If you get either of these errors: 
+- If you get either of these errors:
 
 ```
 - Error: pg_config executable not found.
@@ -95,7 +99,7 @@ Note: running `pip install -r requirements.txt` might be neccesarry after runnin
 - The following creates a super user:
 
 ```
-- sudo -u postgres psql postgres 
+- sudo -u postgres psql postgres
 - \password postgres
 ```
 
@@ -106,7 +110,7 @@ Note: running `pip install -r requirements.txt` might be neccesarry after runnin
 - To set up other postgres user accounts do:
 
 ```
-- create user user_name 
+- create user user_name
 - \password user_name
 ```
 
